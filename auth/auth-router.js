@@ -39,4 +39,18 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.get("/logout", (req, res) => {
+  if (req.session) {
+   req.session.destroy(err => {
+     if (err) {
+       return res.status(500).json({Error: "You can't log out yet."});
+     } else {
+       res.status(200).json({Success: "You have logged out successfully."});
+     }
+   });
+  } else {
+    res.status(200).json({Message: "Hasta La Vista, Baby..."});
+  }
+});
+
 module.exports = router;
