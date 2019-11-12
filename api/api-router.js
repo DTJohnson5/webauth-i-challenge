@@ -2,10 +2,10 @@ const bcrypt = require('bcryptjs');
 const router = require('express').Router();
 
 const authRouter = require('../auth/auth-router.js');
-const usersRouter = require('../users/users-router.js');
+const userRouter = require('../users/user-route.js');
 
 router.use('/auth', authRouter);
-router.use('/users', usersRouter);
+router.use('/users', userRouter);
 
 router.get('/', (req, res) => {
   res.json({ api: "The things I have to do!" });

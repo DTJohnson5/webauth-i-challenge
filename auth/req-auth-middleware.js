@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const Users = require('../users/users-model.js');
+const Users = require('../users/user-model.js');
 
 module.exports = (req, res, next) => {
   let { username, password } = req.headers;
@@ -12,16 +12,16 @@ module.exports = (req, res, next) => {
         if (user && bcrypt.compareSync(password, user.password)) {
           next();
         } else {
-          res.status(401).json({ message: 'Invalid Credentials' });
+          res.status(401).json({Invalid: 'Those credentials are invalid.'});
         }
       })
       .catch(error => {
-        console.log('login error', error);
+        console.log(error);
         res
           .status(500)
-          .json({ message: 'ran into an error, please try later' });
+          .json({Error: 'There was an error processing your request. Please try again later.'});
       });
   } else {
-    res.status(400).json({ message: 'please provide credentials' });
+    res.status(400).json({Required: 'Please enter the required information.'});
   }
 };
